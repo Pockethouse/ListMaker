@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.ViewModelStore
 import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.markbowen.listmaker.MainViewModelFactory
@@ -38,7 +39,14 @@ class MainFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(MainViewModel ::class.java)
+        viewModel = ViewModelProvider(requiredActivity(),
+            MainViewModelFactory(PreferenceManager.getDefaultSharedPreferences(requireActivity())))[MainViewModel::class.java]
+
+
+    }
+
+    private fun requiredActivity(): ViewModelStore {
+        TODO("Not yet implemented")
     }
 
 }
